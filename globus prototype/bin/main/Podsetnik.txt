@@ -1,3 +1,5 @@
 Alert box - je kada kliknemo na nesto iskoci nam novi prozor. To moze biti upotrebljeno za pregled porudzbina
 za menadzera na primer.
 
+TODO: Kada switch-ujem ekran da bi se logovao, nece da ostane maximised taj drugi. Prepraviti to nekako.
+
