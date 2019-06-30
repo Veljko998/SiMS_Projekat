@@ -2,6 +2,8 @@ package main;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,12 +14,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 	
 	Stage window;
-	Scene scene1, scene2;
+	Scene scene1, scene2, scene3;
+	BorderPane border1, border2;
+	GridPane grid1, grid2;
+	HBox hbox1;
+	VBox vbox1, vbox2;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -25,27 +32,99 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		// get screensize of monitor
+		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+		
 		window = primaryStage;
 		
-		BorderPane border = new BorderPane();
-		HBox hbox = addHBox();
-		VBox vbox = addVBox();
-		border.setTop(hbox);
+		border1 = new BorderPane();
+		hbox1 = addHBox();
+		border1.setTop(hbox1);
 		
+		//border2 = new BorderPane();
+		grid1 = new GridPane();
+		grid1.setAlignment(Pos.CENTER);
+//		grid.setHgap(10);
+//		grid.setVgap(12);
+		vbox1 = addVBoxLogIn();
+		//border2.setCenter(vbox);
+		grid1.add(vbox1, 0, 0);
+		
+		//First way to set background color
+		//grid1.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		//Second way to set background color
+		grid1.setStyle("-fx-background-color: #A9A9A9;");
+		
+		grid2 = new GridPane();
+		grid2.setAlignment(Pos.CENTER);
+		vbox2 = addVBoxSignIn();
+		grid2.add(vbox2, 0, 0);
+		
+		scene1 = new Scene(border1, screenSize.getWidth(), screenSize.getHeight());
+		scene2 = new Scene(grid1, screenSize.getWidth(), screenSize.getHeight());
+		scene3 = new Scene(grid2, screenSize.getWidth(), screenSize.getHeight());
 		window.setMaximized(true);
-		scene1 = new Scene(border);
-		scene2 = new Scene(vbox);
 		window.setScene(scene1);
 		window.show();
 		
 	}
 	
-	private VBox addVBox() {
+	private VBox addVBoxSignIn() {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(15, 12, 15, 12));
 		vbox.setSpacing(10);
 		vbox.setStyle("-fx-background-color: #336699;");
+		vbox.setAlignment(Pos.CENTER);
 		
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setHgap(10);
+		grid.setVgap(8);
+		
+		Label usernameLabel = new Label("Username: ");
+		
+		TextField usernameInput = new TextField();
+		usernameInput.setPromptText("username");
+		
+		Label passwordLabel = new Label("Password: ");
+		
+		TextField passwordInput = new TextField();
+		passwordInput.setPromptText("password");
+		
+		HBox hbButtons = new HBox();
+	    hbButtons.setSpacing(10.0);
+	    
+	    Button btnSubmit = new Button("Submit"); // Sign in button
+	    Button btnClear = new Button("Clear");
+	    Button btnExit = new Button("Exit");
+	    btnSubmit.setStyle("-fx-font-size: 12pt;");
+	    btnClear.setStyle("-fx-font-size: 10pt;");
+		
+	    hbButtons.getChildren().addAll(btnSubmit, btnClear, btnExit);
+	    
+	    grid.add(usernameLabel, 0, 0);
+	    grid.add(usernameInput, 1, 0);
+	    grid.add(passwordLabel, 0, 1);
+	    grid.add(passwordInput, 1, 1);
+	    grid.add(hbButtons, 0, 2, 2, 1);
+	    
+	    vbox.getChildren().addAll(grid);
+	    
+	    btnSubmit.setOnAction(e -> {
+	    	window.setScene(scene1);
+	    });
+	    
+		return vbox;
+	}
+
+	private VBox addVBoxLogIn() {
+		VBox vbox = new VBox();
+		vbox.setPadding(new Insets(15, 12, 15, 12));
+		vbox.setSpacing(10);
+		vbox.setStyle("-fx-background-color: #336699;");
+		vbox.setAlignment(Pos.CENTER);
 		
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(10, 10, 10, 10));
@@ -90,9 +169,8 @@ public class Main extends Application {
 		Button loginButton = new Button("Log in");
 		GridPane.setConstraints(loginButton, 1, 4);
 		
-		grid.getChildren().addAll(nameLabel, nameInput, surnameLabel, surnameInput, usernameLabel, usernameInput, passwordLabel, passwordInput, loginButton);
-	    
-	    
+		grid.getChildren().addAll(nameLabel, nameInput, surnameLabel, surnameInput,
+				usernameLabel, usernameInput, passwordLabel, passwordInput, loginButton);
 	    
 	    loginButton.setOnAction(e -> {
 	    	window.setScene(scene1);
@@ -143,6 +221,10 @@ public class Main extends Application {
 	    
 	    Button buttonSignIn = new Button("Sign in");
 	    buttonSignIn.setPrefSize(100, 20);
+	    
+	    buttonSignIn.setOnAction(e -> {
+	    	window.setScene(scene3);
+	    });
 	    
 	    hbox.getChildren().addAll(leftSpacer, button1, button2, button3, button4, button5, button6,  rightSpacer, buttonLogIn, buttonSignIn);
 
