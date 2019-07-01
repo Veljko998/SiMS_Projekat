@@ -18,7 +18,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	
+	//Dodajem novi komentar
 	Stage window;
 	Scene scene1, scene2, scene3;
 	BorderPane border1, border2;
