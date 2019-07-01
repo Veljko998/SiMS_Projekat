@@ -1,69 +1,27 @@
 package main;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class Main extends Application {
-	//Dodajem novi komentar
-	Stage window;
-	Scene scene1, scene2, scene3;
-	BorderPane border1, border2;
-	GridPane grid1, grid2;
-	HBox hbox1;
-	VBox vbox1, vbox2;
+public class Box {
+	private Stage window;
 
-	public static void main(String[] args) {
-		launch(args);
+	public Box(Stage window) {
+		super();
+		this.window = window;
 	}
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		
-		// get screensize of monitor
-		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-		
-		window = primaryStage;
-		
-		border1 = new BorderPane();
-		hbox1 = addHBox();
-		border1.setTop(hbox1);
-		
-		grid1 = new GridPane();
-		grid1.setAlignment(Pos.CENTER);
-		vbox1 = addVBoxLogIn();
-		grid1.add(vbox1, 0, 0);
-		grid1.setStyle("-fx-background-color: #A9A9A9;");
-		
-		grid2 = new GridPane();
-		grid2.setAlignment(Pos.CENTER);
-		vbox2 = addVBoxSignIn();
-		grid2.add(vbox2, 0, 0);
-		grid2.setStyle("-fx-background-color: #ADFF2F;");
-		
-		scene1 = new Scene(border1, screenSize.getWidth(), screenSize.getHeight());
-		scene2 = new Scene(grid1, screenSize.getWidth(), screenSize.getHeight());
-		scene3 = new Scene(grid2, screenSize.getWidth(), screenSize.getHeight());
-		window.setMaximized(true);
-		window.setScene(scene1);
-		window.show();
-		
-	}
-	
-	private VBox addVBoxLogIn() {
+
+	public VBox addVBoxLogIn(Scene scene1) {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(15, 12, 15, 12));
 		vbox.setSpacing(10);
@@ -115,7 +73,7 @@ public class Main extends Application {
 		return vbox;
 	}
 
-	private VBox addVBoxSignIn() {
+	public VBox addVBoxSignIn(Scene scene1) {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(15, 12, 15, 12));
 		vbox.setSpacing(10);
@@ -181,60 +139,22 @@ public class Main extends Application {
 		mailInput.setPromptText("email");
 		GridPane.setConstraints(mailInput, 1, 5);
 		
-		Button signInButton = new Button("Sign in");
-		GridPane.setConstraints(signInButton, 1, 6);
+		Button loginButton = new Button("Log in");
+		GridPane.setConstraints(loginButton, 1, 6);
 		
 		grid.getChildren().addAll(nameLabel, nameInput, surnameLabel, surnameInput, bDayLabel, bDayInput,
-				usernameLabel, usernameInput, passwordLabel, passwordInput, mailLabel, mailInput, signInButton);
+				usernameLabel, usernameInput, passwordLabel, passwordInput, mailLabel, mailInput, loginButton);
 	    
-		
-		signInButton.setOnAction(e -> {
-			boolean correct = checkUserInputs(nameInput.getText(), surnameInput.getText(), bDayInput.getText(),
-					usernameInput.getText());
-			if (correct) {
-				createRegisteredUser();
-				
-				window.setScene(scene1);//Pri zavrsetku ide na scenu 1, ali ce naknadno ici na svoju scenu.
-			}else {
-				nameInput.clear(); surnameInput.clear(); bDayInput.clear();
-				usernameInput.clear(); passwordInput.clear(); mailInput.clear();
-			}
-		});
+	    loginButton.setOnAction(e -> {
+	    	window.setScene(scene1);
+	    });
 		
 	    vbox.getChildren().addAll(grid);
 	    
 		return vbox;
 	}
 
-	private void createRegisteredUser() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private Boolean checkUserInputs(String name, String surname, String bDay, String username) { 
-		//Returns true if all methods in if statement are true.
-		if (checkName(name) && checkName(surname) && checkBDay(bDay) && checkUsername(username)) {
-			return true;
-		}
-		return false;
-	}
-	
-	boolean checkName(String name) {
-		
-		return false;
-	}
-	
-	boolean checkBDay(String bday) {
-		
-		return false;
-	}
-	
-	boolean checkUsername(String username) {
-		
-		return false;
-	}
-
-	public HBox addHBox() {
+	public HBox addHBox(Scene scene2, Scene scene3) {
 		final Pane leftSpacer = new Pane();
 	    HBox.setHgrow(leftSpacer, Priority.SOMETIMES);
 	
@@ -282,7 +202,4 @@ public class Main extends Application {
 
 	    return hbox;
 	}
-	
-	
-
 }

@@ -7,54 +7,36 @@ package model;
 
 import java.util.*;
 
-/** @pdOid 69ec8f90-0182-45ce-bb9d-2b71133e066b */
 public class Prodavnica {
-   /** @pdOid 25def07c-625a-4cd2-8fc3-f6bc43d7f24a */
    private String id;
-   /** @pdOid f9ef3ee1-7543-4780-a2fc-e4171182c2ce */
    private String mesto;
-   /** @pdOid 54b0a455-2676-4700-8967-177de88819d2 */
    private String kontakt;
    
-   /** @pdRoleInfo migr=no name=Proizvod assc=association15 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<Proizvod> proizvod;
-   /** @pdRoleInfo migr=no name=Radnik assc=association16 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<Radnik> radnik;
    
-   /** @param radnik
-    * @pdOid 491f619a-d483-4e04-bad1-cdbbdb36cf2b */
    public void dodajRadnika(Radnik radnik) {
       // TODO: implement
    }
    
-   /** @param radnik
-    * @pdOid 068214d8-0d96-48ac-824f-e584d97d875e */
    public void obrisiRadnika(Radnik radnik) {
       // TODO: implement
    }
    
-   /** @param id
-    * @pdOid 2bfd074a-0edc-449a-a395-62f36cde6216 */
    public Radnik nadjiRadnika(String id) {
       // TODO: implement
       return null;
    }
    
-   /** @param proizvod
-    * @pdOid f9430609-b290-4863-84cd-a847d1a2cafd */
    public void dodajProizvod(Proizvod proizvod) {
       // TODO: implement
    }
    
-   /** @param naziv
-    * @pdOid 5fc24ae3-ac75-48fb-bddf-c4d7a35def86 */
    public Proizvod nadjiProizvod(String naziv) {
       // TODO: implement
       return null;
    }
    
-   /** @param proizvod
-    * @pdOid 6f63a6e2-f7fb-4a77-9813-f5ba089cf12f */
    public void obrisiProizvod(Proizvod proizvod) {
       // TODO: implement
    }
@@ -108,6 +90,7 @@ public class Prodavnica {
       if (proizvod != null)
          proizvod.clear();
    }
+   
    /** @pdGenerated default getter */
    public java.util.Collection<Radnik> getRadnik() {
       if (radnik == null)

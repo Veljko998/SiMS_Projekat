@@ -7,125 +7,85 @@ package model;
 
 import java.util.*;
 
-/** @pdOid 1c26866f-0723-4d3d-aa6a-17322e1445bd */
 public class WebShop {
-   /** @pdOid 97b74fb7-5e48-413f-ad90-37cc44fae91c */
    private String naziv;
-   /** @pdOid 88384810-018e-4c01-b6cd-71983e27f723 */
    private String infoCentar;
    
-   /** @pdRoleInfo migr=no name=Proizvod assc=association3 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<Proizvod> proizvod;
-   /** @pdRoleInfo migr=no name=Prodavnica assc=association4 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<Prodavnica> prodavnica;
-   /** @pdRoleInfo migr=no name=Cenovnik assc=association8 coll=java.util.Collection impl=java.util.HashSet mult=0..* type=Composition */
    public java.util.Collection<Cenovnik> cenovnik;
-   /** @pdRoleInfo migr=no name=RegistrovaniKupac assc=association13 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<RegistrovaniKupac> registrovaniKupac;
-   /** @pdRoleInfo migr=no name=Narudzbina assc=association14 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<Narudzbina> narudzbina;
    
-   /** @param registrovaniKupac
-    * @pdOid b54ec9e9-b15f-4056-8f7c-a176e9940caf */
    public void dodajMenadzera(RegistrovaniKupac registrovaniKupac) {
       // TODO: implement
    }
    
-   /** @param id
-    * @pdOid a8b7bdd4-4be8-4b19-94df-b49e3c74e8ae */
    public Narudzbina nadjiNarudzbinu(String id) {
       // TODO: implement
       return null;
    }
    
-   /** @pdOid b4798826-bd03-4a56-9ffc-9ecc1b35ce70 */
    public void promenaBojeSajta() {
       // TODO: implement
    }
    
-   /** @pdOid 6138692a-f370-41b0-829f-b575263c5197 */
    public void promenaRasporedaProizvoda() {
       // TODO: implement
    }
    
-   /** @param korisnik
-    * @pdOid f238896d-aa04-4f7d-b1bc-a465b952e742 */
    public void pregledPorudzbina(RegistrovaniKupac korisnik) {
       // TODO: implement
    }
    
-   /** @param proizvod
-    * @pdOid bf7dbd78-8c15-48fc-b8d5-d74016601765 */
    public void dodajProizvod(Proizvod proizvod) {
       // TODO: implement
    }
    
-   /** @param proizvod
-    * @pdOid 9f531789-993b-4f7b-b4f5-56292ed9d396 */
    public void obrisiProizvod(Proizvod proizvod) {
       // TODO: implement
    }
    
-   /** @param naziv
-    * @pdOid bb260a02-9f2c-4dd3-984c-f3a2f9d3b560 */
    public Proizvod nadjiProizvod(String naziv) {
       // TODO: implement
       return null;
    }
    
-   /** @param prodavnica
-    * @pdOid 282af38e-c130-4581-8e17-5961446fb2c0 */
    public void dodajProdavnicu(Prodavnica prodavnica) {
       // TODO: implement
    }
    
-   /** @param id
-    * @pdOid 02761f76-3a9d-4bb8-8224-8cdf0e6c0a14 */
    public Prodavnica nadjiProdavnicu(int id) {
       // TODO: implement
       return null;
    }
    
-   /** @param prodavnica
-    * @pdOid dd76dfd3-54ee-4634-9a91-08cb6bdb7d2c */
    public void obrisiProdavnicu(Prodavnica prodavnica) {
       // TODO: implement
    }
    
-   /** @param registrovaniKupac
-    * @pdOid 25134046-cb70-4e29-8c16-bfaf92db1fe8 */
    public void dodajKupca(RegistrovaniKupac registrovaniKupac) {
       // TODO: implement
    }
    
-   /** @param korisnickoIme
-    * @pdOid 8c10ab71-9086-47ce-8762-1c527e6a6eb2 */
    public RegistrovaniKupac nadjiKupca(String korisnickoIme) {
       // TODO: implement
       return null;
    }
    
-   /** @param registrovaniKupac
-    * @pdOid aa553803-9477-4c20-83f2-65c136ae09a1 */
    public void obrisiKupca(RegistrovaniKupac registrovaniKupac) {
       // TODO: implement
    }
    
-   /** @param cenovnik
-    * @pdOid 7c9f1bb9-ba01-4d84-a176-20f6aca2a138 */
    public void dodajCenovnik(Cenovnik cenovnik) {
       // TODO: implement
    }
    
-   /** @param id
-    * @pdOid 8d2fe659-49da-4f0e-a714-79b3c97eddb8 */
    public Cenovnik nadjiCenovnik(String id) {
       // TODO: implement
       return null;
    }
    
-   /** @param cenovnik
-    * @pdOid de11d233-55c1-4f6a-b7d5-89c2618cc43a */
    public void obrisiCenovnik(Cenovnik cenovnik) {
       // TODO: implement
    }

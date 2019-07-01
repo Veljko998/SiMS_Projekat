@@ -1,4 +1,7 @@
 Alert box - je kada kliknemo na nesto iskoci nam novi prozor. To moze biti upotrebljeno za pregled porudzbina
 za menadzera na primer.
 
-TODO: 
+TODO: Provera maila takodje staviti.
+
+-Da li treba da se proverava validacija mejla, tj da li neko vec koristi taj mejl?
+

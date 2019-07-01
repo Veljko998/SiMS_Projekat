@@ -7,50 +7,33 @@ package model;
 
 import java.util.*;
 
-/** @pdOid 139ce05b-6c53-4103-b508-8b6f3f213892 */
 public class Kategorija {
-   /** @pdOid 18a9b033-1c70-48ae-ba37-507691a5e214 */
    private String naziv;
-   
-   /** @pdRoleInfo migr=no name=Proizvod assc=association20 coll=java.util.Collection impl=java.util.HashSet mult=0..* */
    public java.util.Collection<Proizvod> proizvod;
-   /** @pdRoleInfo migr=no name=Kategorija assc=association21 coll=java.util.Collection impl=java.util.HashSet mult=0..* type=Aggregation */
    public java.util.Collection<Kategorija> kategorijaB;
    
-   /** @param proizvod
-    * @pdOid 258e3a33-f15a-45bf-88e9-515d396b3f7c */
    public void dodajProizvod(Proizvod proizvod) {
       // TODO: implement
    }
    
-   /** @param naziv
-    * @pdOid 89e995d6-2eac-4bfd-aa3d-53addf67c1ce */
    public Proizvod nadjiProizvod(String naziv) {
       // TODO: implement
       return null;
    }
    
-   /** @param proizvod
-    * @pdOid a754736e-8073-4811-9d9b-6f12b9aceb45 */
    public void obrisiProizvod(Proizvod proizvod) {
       // TODO: implement
    }
    
-   /** @param kategorija
-    * @pdOid 3ccf1b5f-44af-4980-9440-66d00fbbf43a */
    public void dodajKategoriju(Kategorija kategorija) {
       // TODO: implement
    }
    
-   /** @param naziv
-    * @pdOid a9a3ddbb-85fd-4d45-b25c-40c2afcb1faf */
    public Kategorija nadjiKategoriju(String naziv) {
       // TODO: implement
       return null;
    }
    
-   /** @param kategorija
-    * @pdOid 191cdbdf-255a-43e4-95af-6da842bd6b55 */
    public void obrisiKategoriju(Kategorija kategorija) {
       // TODO: implement
    }
@@ -118,6 +101,7 @@ public class Kategorija {
          }
       }
    }
+   
    /** @pdGenerated default getter */
    public java.util.Collection<Kategorija> getKategorijaB() {
       if (kategorijaB == null)
