@@ -25,6 +25,7 @@ public class Main extends Application {
 	GridPane grid1, grid2;
 	HBox hbox1;
 	VBox vbox1, vbox2;
+	// komentar 252525
 
 	public static void main(String[] args) {
 		launch(args);
