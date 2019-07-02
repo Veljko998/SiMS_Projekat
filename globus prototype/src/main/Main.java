@@ -1,8 +1,10 @@
 package main;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.application.Application;
@@ -21,6 +23,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.RegistrovaniKupac;
+import model.Uloga;
 
 public class Main extends Application {
 	//Dodajem novi komentar
@@ -30,6 +34,8 @@ public class Main extends Application {
 	GridPane grid1, grid2;
 	HBox hbox1;
 	VBox vbox1, vbox2;
+	ArrayList<RegistrovaniKupac> users = new ArrayList<>();
+	FileLoader fl = new FileLoader();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -37,10 +43,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
 		// get screensize of monitor
 		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-		
 		window = primaryStage;
 		
 		border1 = new BorderPane();
@@ -65,7 +69,6 @@ public class Main extends Application {
 		window.setMaximized(true);
 		window.setScene(scene1);
 		window.show();
-		
 	}
 	
 	private VBox addVBoxLogIn() {
@@ -120,7 +123,7 @@ public class Main extends Application {
 		return vbox;
 	}
 
-	private VBox addVBoxSignIn() {
+	private VBox addVBoxSignIn() throws IOException {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(15, 12, 15, 12));
 		vbox.setSpacing(10);
@@ -201,9 +204,20 @@ public class Main extends Application {
 			boolean correct = checkUserInputs(nameInput.getText(), surnameInput.getText(), bDayInput.getText(),
 					usernameInput.getText());
 			if (correct) {
-				createRegisteredUser();
+				try { fl.loadRegUsers(users);} catch (IOException e1) {e1.printStackTrace();}
+				RegistrovaniKupac rk;
+				try {
+					rk = createRegisteredUser(nameInput.getText(), surnameInput.getText(), bDayInput.getText(),
+							usernameInput.getText(), passwordInput.getText(), mailInput.getText());
+					users.add(rk);
+					try {fl.writeUsers(users);} catch (IOException e1) {e1.printStackTrace();}
+					nameInput.clear(); surnameInput.clear(); bDayInput.clear();
+					usernameInput.clear(); passwordInput.clear(); mailInput.clear();
+				} catch (ParseException e2) {
+					e2.printStackTrace();
+				}
 				
-				window.setScene(scene1);//Pri zavrsetku ide na scenu 1, ali ce naknadno ici na svoju scenu.
+				//window.setScene(scene1);//Pri zavrsetku ide na scenu 1, ali ce naknadno ici na svoju scenu.
 			}else {
 				nameInput.clear(); surnameInput.clear(); bDayInput.clear();
 				usernameInput.clear(); passwordInput.clear(); mailInput.clear();
@@ -215,14 +229,18 @@ public class Main extends Application {
 		return vbox;
 	}
 
-	private void createRegisteredUser() {
-		// TODO Auto-generated method stub
+	private RegistrovaniKupac createRegisteredUser(String name, String surname, String bday, String username, String password, String mail) throws ParseException {
+		Date regday = new Date(); // Current day
+		Date bdaydate = new SimpleDateFormat("dd.MM.yyyy.").parse(bday);
+		RegistrovaniKupac rk = new RegistrovaniKupac(name, surname, bdaydate, regday, Uloga.REGKUPAC, username, password, mail);
 		
+		return rk;
 	}
 
 	private Boolean checkUserInputs(String name, String surname, String bDay, String username) { 
 		//Returns true if all methods in if statement are true.
 		if (checkName(name) && checkName(surname) && checkBDay(bDay) && checkUsername(username)) {
+			System.out.println("Prosla provera za unos.");
 			return true;
 		}
 		return false;
@@ -243,7 +261,7 @@ public class Main extends Application {
 				continue;
 			}
 		}
-		System.out.println("Nema broja.");
+		System.out.println("Prsla provera za ime i/ili prezime");
 		return true;
 	}
 	
@@ -254,13 +272,21 @@ public class Main extends Application {
 			return false;
 		} catch (ParseException e) {
 			return false;
-		} 
+		} catch (Exception e) {
+			return false;
+		}
+		System.out.println("Prosla provera za datum.");
 		return true;
 	}
 	
 	boolean checkUsername(String username) {
-		
-		return false;
+		for (RegistrovaniKupac rk : users) {
+			if (rk.getKorisnickoIme().equals(username)) {
+				return false;
+			}
+		}
+		System.out.println("Prosla provera za username.");
+		return true;
 	}
 
 	public HBox addHBox() {

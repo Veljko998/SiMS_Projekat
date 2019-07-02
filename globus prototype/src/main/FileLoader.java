@@ -16,7 +16,7 @@ public class FileLoader {
 	public static String sp = System.getProperty("file.separator");
 	
 	public void loadRegUsers(ArrayList<RegistrovaniKupac> users) throws IOException {
-		//TODO: Load all registered users in list users.
+		System.out.println("Idemooo");
 		users.clear();
 		BufferedReader output = new BufferedReader(new FileReader("." + sp + "registeredUsers.txt"));
 		String currentLine;
@@ -40,7 +40,7 @@ public class FileLoader {
 		//		This way is maybe faster.
 	}
 	
-	public void writeUser(RegistrovaniKupac rk) {
+	public void writeUser() {
 		//TODO: Write just one user in txt file, if possible.
 		
 	}
