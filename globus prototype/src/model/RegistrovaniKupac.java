@@ -19,7 +19,71 @@ public class RegistrovaniKupac {
    
    
    
-   public RegistrovaniKupac(String ime, String prezime, Date datumRodjenja, Date datumRegistrovanja, Uloga uloga,
+   public String getIme() {
+	return ime;
+}
+
+public void setIme(String ime) {
+	this.ime = ime;
+}
+
+public String getPrezime() {
+	return prezime;
+}
+
+public void setPrezime(String prezime) {
+	this.prezime = prezime;
+}
+
+public Date getDatumRodjenja() {
+	return datumRodjenja;
+}
+
+public void setDatumRodjenja(Date datumRodjenja) {
+	this.datumRodjenja = datumRodjenja;
+}
+
+public Date getDatumRegistrovanja() {
+	return datumRegistrovanja;
+}
+
+public void setDatumRegistrovanja(Date datumRegistrovanja) {
+	this.datumRegistrovanja = datumRegistrovanja;
+}
+
+public Uloga getUloga() {
+	return uloga;
+}
+
+public void setUloga(Uloga uloga) {
+	this.uloga = uloga;
+}
+
+public String getKorisnickoIme() {
+	return korisnickoIme;
+}
+
+public void setKorisnickoIme(String korisnickoIme) {
+	this.korisnickoIme = korisnickoIme;
+}
+
+public String getLozinka() {
+	return lozinka;
+}
+
+public void setLozinka(String lozinka) {
+	this.lozinka = lozinka;
+}
+
+public String getMejl() {
+	return mejl;
+}
+
+public void setMejl(String mejl) {
+	this.mejl = mejl;
+}
+
+public RegistrovaniKupac(String ime, String prezime, Date datumRodjenja, Date datumRegistrovanja, Uloga uloga,
 		String korisnickoIme, String lozinka, String mejl) {
 	super();
 	this.ime = ime;
