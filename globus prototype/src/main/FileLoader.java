@@ -2,7 +2,9 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,9 +45,17 @@ public class FileLoader {
 		
 	}
 	
-	public void writeUsers(ArrayList<RegistrovaniKupac> users) {
+	public void writeUsers(ArrayList<RegistrovaniKupac> users) throws IOException {
 		//TODO: Write all user in file.
-		
+		PrintWriter input = new PrintWriter(new FileWriter("." + sp + "registeredUsers.txt"));
+		for (RegistrovaniKupac regk : users) {
+			String dateOfBirth = new SimpleDateFormat("dd.MM.yyyy.").format(regk.getDatumRodjenja());
+			String dateOdReg = new SimpleDateFormat("dd.MM.yyyy.").format(regk.getDatumRegistrovanja());
+			String a = regk.getIme()+"|"+regk.getPrezime()+"|"+dateOfBirth+"|"+dateOdReg+"|"+regk.getUloga().name()+"|"+
+			regk.getKorisnickoIme()+"|"+regk.getLozinka()+"|"+regk.getMejl();
+			input.println(a);
+		}
+		input.close();
 	}
 
 }
