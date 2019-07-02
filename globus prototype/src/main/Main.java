@@ -1,5 +1,10 @@
 package main;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -243,8 +248,14 @@ public class Main extends Application {
 	}
 	
 	boolean checkBDay(String bday) {
-		
-		return false;
+		try {
+			Date dateOfBirth = new SimpleDateFormat("dd.MM.yyyy.").parse(bday);
+		} catch (DateTimeParseException e) {
+			return false;
+		} catch (ParseException e) {
+			return false;
+		} 
+		return true;
 	}
 	
 	boolean checkUsername(String username) {
