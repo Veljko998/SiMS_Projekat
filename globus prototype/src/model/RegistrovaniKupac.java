@@ -17,7 +17,22 @@ public class RegistrovaniKupac {
    private String lozinka;
    private String mejl;
    
-   public java.util.Collection<Proizvod> listaZelja;
+   
+   
+   public RegistrovaniKupac(String ime, String prezime, Date datumRodjenja, Date datumRegistrovanja, Uloga uloga,
+		String korisnickoIme, String lozinka, String mejl) {
+	super();
+	this.ime = ime;
+	this.prezime = prezime;
+	this.datumRodjenja = datumRodjenja;
+	this.datumRegistrovanja = datumRegistrovanja;
+	this.uloga = uloga;
+	this.korisnickoIme = korisnickoIme;
+	this.lozinka = lozinka;
+	this.mejl = mejl;
+}
+
+public java.util.Collection<Proizvod> listaZelja;
    public java.util.Collection<Narudzbina> narudzbina;
    public WebShop webShop;
    
