@@ -184,9 +184,13 @@ public class Main extends Application {
 		Button signInButton = new Button("Sign in");
 		GridPane.setConstraints(signInButton, 1, 6);
 		
+		Button quitButton = new Button("Quit");
+		GridPane.setConstraints(quitButton, 2, 6);
+		
 		grid.getChildren().addAll(nameLabel, nameInput, surnameLabel, surnameInput, bDayLabel, bDayInput,
-				usernameLabel, usernameInput, passwordLabel, passwordInput, mailLabel, mailInput, signInButton);
+				usernameLabel, usernameInput, passwordLabel, passwordInput, mailLabel, mailInput, signInButton, quitButton);
 	    
+		quitButton.setOnAction(e -> window.setScene(scene1));
 		
 		signInButton.setOnAction(e -> {
 			boolean correct = checkUserInputs(nameInput.getText(), surnameInput.getText(), bDayInput.getText(),
@@ -220,8 +224,22 @@ public class Main extends Application {
 	}
 	
 	boolean checkName(String name) {
+		if (name.equals(null) || name.equals("")) {
+			System.out.println("Nista nismo uneli");
+			return false;
+		}
 		
-		return false;
+		for (int i = 0; i < name.length(); i++) {
+			try {
+				Integer.parseInt(String.valueOf(name.charAt(i)));
+				System.out.println("Broj");
+				return false;
+			} catch (Exception e) {
+				continue;
+			}
+		}
+		System.out.println("Nema broja.");
+		return true;
 	}
 	
 	boolean checkBDay(String bday) {
