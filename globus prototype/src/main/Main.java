@@ -1,5 +1,8 @@
 package main;
 
+import java.awt.ScrollPane;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,19 +11,29 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.RegistrovaniKupac;
@@ -29,13 +42,17 @@ import model.Uloga;
 public class Main extends Application {
 	//Dodajem novi komentar
 	Stage window;
-	Scene scene1, scene2, scene3;
+	Scene scene1, scene2, scene3, sceneProducts;
 	BorderPane border1, border2;
-	GridPane grid1, grid2;
+	GridPane grid1, grid2, gridproducts;
+	ScrollPane sp1;
+	StackPane stack1;
+	ScrollBar sc1, scProducts;
 	HBox hbox1;
-	VBox vbox1, vbox2;
+	VBox vbox1, vbox2, vbProducts;
 	ArrayList<RegistrovaniKupac> users = new ArrayList<>();
 	FileLoader fl = new FileLoader();
+	DropShadow shadow = new DropShadow();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -47,9 +64,13 @@ public class Main extends Application {
 		Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
 		window = primaryStage;
 		
+		
 		border1 = new BorderPane();
 		hbox1 = addHBox();
 		border1.setTop(hbox1);
+		gridproducts = addGridPaneProducts();
+		border1.setCenter(gridproducts);
+		
 		
 		grid1 = new GridPane();
 		grid1.setAlignment(Pos.CENTER);
@@ -63,14 +84,86 @@ public class Main extends Application {
 		grid2.add(vbox2, 0, 0);
 		grid2.setStyle("-fx-background-color: #ADFF2F;");
 		
+		stack1 = new StackPane();
+		stack1 = addStackPane1();
+		
+		vbProducts = new VBox();
+		scProducts = new ScrollBar();
+		
+		Group root = new Group();
+		sceneProducts = new Scene(root);
+		root.getChildren().addAll(vbProducts, scProducts);
+//		
+		shadow.setColor(Color.GREY);
+		shadow.setOffsetX(2);
+		shadow.setOffsetY(2);
+		
+		vbProducts.setLayoutX(5);
+		vbProducts.setLayoutY(10);
+		
+		scProducts.setLayoutX(sceneProducts.getWidth() - scProducts.getWidth());
+		scProducts.setMin(0);
+		scProducts.setOrientation(Orientation.VERTICAL);
+		scProducts.setPrefHeight(180);
+		scProducts.setMax(360);
+		
+		FileInputStream input = new FileInputStream("protein.png");
+        Image image = new Image(input);
+        ImageView iv1 = new ImageView(image);
+        ImageView iv2 = new ImageView(image);
+        ImageView iv3 = new ImageView(image);
+        iv1.setEffect(shadow);
+        iv2.setEffect(shadow);
+        iv3.setEffect(shadow);
+        vbProducts.getChildren().addAll(iv1, iv2, iv3);
+        
+        scProducts.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                Number old_val, Number new_val) {
+                    vbProducts.setLayoutY(-new_val.doubleValue());
+            }
+        });
+        
+		
 		scene1 = new Scene(border1, screenSize.getWidth(), screenSize.getHeight());
 		scene2 = new Scene(grid1, screenSize.getWidth(), screenSize.getHeight());
 		scene3 = new Scene(grid2, screenSize.getWidth(), screenSize.getHeight());
+		
 		window.setMaximized(true);
 		window.setScene(scene1);
 		window.show();
 	}
 	
+	private StackPane addStackPane1() {
+		ScrollBar s = new ScrollBar();
+        s.setMin(0);  
+        s.setMax(200);  
+        s.setValue(50);  
+        s.setOrientation(Orientation.VERTICAL);  
+//        s.setUnitIncrement(12);  
+//        s.setBlockIncrement(10);  
+        StackPane root = new StackPane();  
+        root.getChildren().add(s); 
+		return root;
+	}
+
+	private GridPane addGridPaneProducts() throws FileNotFoundException {
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.TOP_CENTER);
+		
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setHgap(10);
+		grid.setVgap(10);
+		
+		FileInputStream input = new FileInputStream("protein.png");
+        Image image = new Image(input);
+        ImageView iv1 = new ImageView(image);
+		
+        grid.add(iv1, 0, 0);
+		
+		return grid;
+	}
+
 	private VBox addVBoxLogIn() {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(15, 12, 15, 12));
@@ -301,8 +394,8 @@ public class Main extends Application {
 	    hbox.setSpacing(10);
 	    hbox.setStyle("-fx-background-color: #336699;");
 
-	    Button button1 = new Button("Button1");
-	    button1.setPrefSize(100, 20);
+	    Button productsButton = new Button("Products");
+	    productsButton.setPrefSize(100, 20);
 
 	    Button button2 = new Button("Button2");
 	    button2.setPrefSize(100, 20);
@@ -316,7 +409,7 @@ public class Main extends Application {
 	    Button button5 = new Button("Button5");
 	    button5.setPrefSize(100, 20);
 	    
-	    Button button6 = new Button("Button6");
+	    Button button6 = new Button("Contact us");
 	    button6.setPrefSize(100, 20);
 	    
 	    Button buttonLogIn = new Button("Log in");
@@ -333,7 +426,11 @@ public class Main extends Application {
 	    	window.setScene(scene3);
 	    });
 	    
-	    hbox.getChildren().addAll(leftSpacer, button1, button2, button3, button4, button5, button6,  rightSpacer, buttonLogIn, buttonSignIn);
+	    productsButton.setOnAction(e -> {
+	    	window.setScene(sceneProducts);
+	    });
+	    
+	    hbox.getChildren().addAll(leftSpacer, productsButton, button2, button3, button4, button5, button6,  rightSpacer, buttonLogIn, buttonSignIn);
 
 	    return hbox;
 	}
