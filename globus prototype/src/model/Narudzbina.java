@@ -19,7 +19,20 @@ public class Narudzbina {
    private Stanje stanje;
    public RegistrovaniKupac registrovaniKupac;
    
-   public void zabraniPromenuNarudzbine() {
+   public Narudzbina(String id, double ukupnaCena, boolean placena, Date datumPorudzbine, Date ocekivanaIsporuka,
+		String adresaIsporuke, Stanje stanje, RegistrovaniKupac registrovaniKupac) {
+	super();
+	this.id = id;
+	this.ukupnaCena = ukupnaCena;
+	this.placena = placena;
+	this.datumPorudzbine = datumPorudzbine;
+	this.ocekivanaIsporuka = ocekivanaIsporuka;
+	this.adresaIsporuke = adresaIsporuke;
+	this.stanje = stanje;
+	this.registrovaniKupac = registrovaniKupac;
+}
+
+public void zabraniPromenuNarudzbine() {
       // TODO: implement
    }
    

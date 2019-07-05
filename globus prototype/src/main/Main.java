@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.ScrollPane;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -84,67 +84,14 @@ public class Main extends Application {
 		grid2.add(vbox2, 0, 0);
 		grid2.setStyle("-fx-background-color: #ADFF2F;");
 		
-		stack1 = new StackPane();
-		stack1 = addStackPane1();
-		
-		vbProducts = new VBox();
-		scProducts = new ScrollBar();
-		
-		Group root = new Group();
-		sceneProducts = new Scene(root);
-		root.getChildren().addAll(vbProducts, scProducts);
-//		
-		shadow.setColor(Color.GREY);
-		shadow.setOffsetX(2);
-		shadow.setOffsetY(2);
-		
-		vbProducts.setLayoutX(5);
-		vbProducts.setLayoutY(10);
-		
-		scProducts.setLayoutX(sceneProducts.getWidth() - scProducts.getWidth());
-		scProducts.setMin(0);
-		scProducts.setOrientation(Orientation.VERTICAL);
-		scProducts.setPrefHeight(180);
-		scProducts.setMax(360);
-		
-		FileInputStream input = new FileInputStream("protein.png");
-        Image image = new Image(input);
-        ImageView iv1 = new ImageView(image);
-        ImageView iv2 = new ImageView(image);
-        ImageView iv3 = new ImageView(image);
-        iv1.setEffect(shadow);
-        iv2.setEffect(shadow);
-        iv3.setEffect(shadow);
-        vbProducts.getChildren().addAll(iv1, iv2, iv3);
-        
-        scProducts.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<? extends Number> ov,
-                Number old_val, Number new_val) {
-                    vbProducts.setLayoutY(-new_val.doubleValue());
-            }
-        });
-        
-		
 		scene1 = new Scene(border1, screenSize.getWidth(), screenSize.getHeight());
 		scene2 = new Scene(grid1, screenSize.getWidth(), screenSize.getHeight());
 		scene3 = new Scene(grid2, screenSize.getWidth(), screenSize.getHeight());
+		//sceneProducts = new Scene(gridproducts, screenSize.getWidth(), screenSize.getHeight());
 		
 		window.setMaximized(true);
 		window.setScene(scene1);
 		window.show();
-	}
-	
-	private StackPane addStackPane1() {
-		ScrollBar s = new ScrollBar();
-        s.setMin(0);  
-        s.setMax(200);  
-        s.setValue(50);  
-        s.setOrientation(Orientation.VERTICAL);  
-//        s.setUnitIncrement(12);  
-//        s.setBlockIncrement(10);  
-        StackPane root = new StackPane();  
-        root.getChildren().add(s); 
-		return root;
 	}
 
 	private GridPane addGridPaneProducts() throws FileNotFoundException {
@@ -155,12 +102,65 @@ public class Main extends Application {
 		grid.setHgap(10);
 		grid.setVgap(10);
 		
-		FileInputStream input = new FileInputStream("protein.png");
+		FileInputStream input = new FileInputStream("protein.jpg");
         Image image = new Image(input);
+        int s = 300;
         ImageView iv1 = new ImageView(image);
+        iv1.setFitHeight(s); iv1.setFitWidth(s);
+        ImageView iv2 = new ImageView(image);
+        iv2.setFitHeight(s); iv2.setFitWidth(s);
+        ImageView iv3 = new ImageView(image);
+        iv3.setFitHeight(s); iv3.setFitWidth(s);
+        ImageView iv4 = new ImageView(image);
+        iv4.setFitHeight(s); iv4.setFitWidth(s);
+        
+        Button kupi1 = new Button("Kupi");
+        Button kupi2 = new Button("Kupi");
+        Button kupi3 = new Button("Kupi");
+        Button kupi4 = new Button("Kupi");
 		
         grid.add(iv1, 0, 0);
-		
+        grid.add(iv2, 1, 0);
+        grid.add(kupi1, 0, 1);
+        grid.add(kupi2, 1, 1);
+        grid.add(iv3, 0, 2);
+        grid.add(iv4, 1, 2);
+        grid.add(kupi3, 0, 3);
+        grid.add(kupi4, 1, 3);
+        
+        kupi1.setOnAction(e -> {
+			try {
+				Order.display("Order", "Nista");
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		});
+        kupi2.setOnAction(e -> {
+			try {
+				Order.display("Order", "Nista");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+        kupi3.setOnAction(e -> {
+			try {
+				Order.display("Order", "Nista");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+        kupi4.setOnAction(e -> {
+			try {
+				Order.display("Order", "Nista");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+        
 		return grid;
 	}
 
@@ -426,9 +426,9 @@ public class Main extends Application {
 	    	window.setScene(scene3);
 	    });
 	    
-	    productsButton.setOnAction(e -> {
-	    	window.setScene(sceneProducts);
-	    });
+//	    productsButton.setOnAction(e -> {
+//	    	window.setScene(sceneProducts);
+//	    });
 	    
 	    hbox.getChildren().addAll(leftSpacer, productsButton, button2, button3, button4, button5, button6,  rightSpacer, buttonLogIn, buttonSignIn);
 
