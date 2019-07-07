@@ -68,6 +68,12 @@ public class Narudzbina {
    
    public void poslatZahtev() {
       stanje.poslatZahtev();
+      
+      this.datumPorudzbine = new Date();
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(datumPorudzbine);
+      cal.add(Calendar.DATE, 5);
+      this.ocekivanaIsporuka = cal.getTime();
    }
    
    public void izvrsenaUplata() {
@@ -77,6 +83,8 @@ public class Narudzbina {
    
    public void otkazanZahtev() {
       stanje.otkazanZahtev();
+      this.datumPorudzbine = null;
+      this.ocekivanaIsporuka = null;
    }
    
    public void narudzbinaUrucena() {
