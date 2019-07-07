@@ -9,6 +9,11 @@ package model;
 import java.util.*;
 
 public class Urucena extends Stanje {
+   public Urucena(Narudzbina narudzbina) {
+		super(narudzbina);
+		// TODO Auto-generated constructor stub
+	}
+
    public void entry() {
       // TODO: implement
    }
@@ -30,7 +35,8 @@ public class Urucena extends Stanje {
    }
    
    public void narudzbinaVracena() {
-      // TODO: implement
+      Vracena vracena = new Vracena(narudzbina);
+      narudzbina.promeniStanje(vracena);
    }
 
 }

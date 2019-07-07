@@ -10,28 +10,14 @@ import java.util.*;
 public abstract class Stanje {
    public Narudzbina narudzbina;
    
-   public void entry() {
-      // TODO: implement
+   public Stanje(Narudzbina narudzbina) {
+	   this.narudzbina = narudzbina;
    }
    
-   public void poslatZahtev() {
-      // TODO: implement
-   }
-   
-   public void izvrsenaUplata() {
-      // TODO: implement
-   }
-   
-   public void otkazanZahtev() {
-      // TODO: implement
-   }
-   
-   public void narudzbinaUrucena() {
-      // TODO: implement
-   }
-   
-   public void narudzbinaVracena() {
-      // TODO: implement
-   }
-
+   public abstract void entry();
+   public abstract void poslatZahtev();
+   public abstract void izvrsenaUplata();
+   public abstract void otkazanZahtev();
+   public abstract void narudzbinaUrucena();
+   public abstract void narudzbinaVracena();
 }

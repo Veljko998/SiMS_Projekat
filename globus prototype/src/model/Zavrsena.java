@@ -8,8 +8,14 @@ package model;
 import java.util.*;
 
 public class Zavrsena extends Stanje {
+	
+   public Zavrsena(Narudzbina narudzbina) {
+		super(narudzbina);
+		// TODO Auto-generated constructor stub
+	}
+
    public void entry() {
-      // TODO: implement
+      narudzbina.zabraniPromenuNarudzbine();
    }
    
    public void poslatZahtev() {
@@ -17,11 +23,13 @@ public class Zavrsena extends Stanje {
    }
    
    public void izvrsenaUplata() {
-      // TODO: implement
+      Poslata poslata = new Poslata(narudzbina);
+      narudzbina.promeniStanje(poslata);
    }
    
    public void otkazanZahtev() {
-      // TODO: implement
+      Korpa korpa = new Korpa(narudzbina);
+      narudzbina.promeniStanje(korpa);
    }
    
    public void narudzbinaUrucena() {

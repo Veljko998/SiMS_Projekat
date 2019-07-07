@@ -17,89 +17,34 @@ public class RegistrovaniKupac {
    private String lozinka;
    private String mejl;
    
-   
-   
-   public String getIme() {
-	return ime;
-}
-
-public void setIme(String ime) {
-	this.ime = ime;
-}
-
-public String getPrezime() {
-	return prezime;
-}
-
-public void setPrezime(String prezime) {
-	this.prezime = prezime;
-}
-
-public Date getDatumRodjenja() {
-	return datumRodjenja;
-}
-
-public void setDatumRodjenja(Date datumRodjenja) {
-	this.datumRodjenja = datumRodjenja;
-}
-
-public Date getDatumRegistrovanja() {
-	return datumRegistrovanja;
-}
-
-public void setDatumRegistrovanja(Date datumRegistrovanja) {
-	this.datumRegistrovanja = datumRegistrovanja;
-}
-
-public Uloga getUloga() {
-	return uloga;
-}
-
-public void setUloga(Uloga uloga) {
-	this.uloga = uloga;
-}
-
-public String getKorisnickoIme() {
-	return korisnickoIme;
-}
-
-public void setKorisnickoIme(String korisnickoIme) {
-	this.korisnickoIme = korisnickoIme;
-}
-
-public String getLozinka() {
-	return lozinka;
-}
-
-public void setLozinka(String lozinka) {
-	this.lozinka = lozinka;
-}
-
-public String getMejl() {
-	return mejl;
-}
-
-public void setMejl(String mejl) {
-	this.mejl = mejl;
-}
-
-public RegistrovaniKupac(String ime, String prezime, Date datumRodjenja, Date datumRegistrovanja, Uloga uloga,
-		String korisnickoIme, String lozinka, String mejl) {
-	super();
-	this.ime = ime;
-	this.prezime = prezime;
-	this.datumRodjenja = datumRodjenja;
-	this.datumRegistrovanja = datumRegistrovanja;
-	this.uloga = uloga;
-	this.korisnickoIme = korisnickoIme;
-	this.lozinka = lozinka;
-	this.mejl = mejl;
-}
-
-public java.util.Collection<Proizvod> listaZelja;
-   public java.util.Collection<Narudzbina> narudzbina;
+   public ArrayList<Proizvod> listaZelja;
+   public ArrayList<Narudzbina> narudzbina;
    public WebShop webShop;
+
+	public RegistrovaniKupac(String ime, String prezime, Date datumRodjenja, Date datumRegistrovanja, Uloga uloga,
+			String korisnickoIme, String lozinka, String mejl) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.datumRodjenja = datumRodjenja;
+		this.datumRegistrovanja = datumRegistrovanja;
+		this.uloga = uloga;
+		this.korisnickoIme = korisnickoIme;
+		this.lozinka = lozinka;
+		this.mejl = mejl;
+		
+		this.listaZelja = new ArrayList<Proizvod>();
+		this.narudzbina = new ArrayList<Narudzbina>();
+	}
    
+	public RegistrovaniKupac(String ime, String prezime, Date datumRodjenja, Date datumRegistrovanja, Uloga uloga,
+			String korisnickoIme, String lozinka, String mejl, WebShop webShop) {
+		this(ime, prezime, datumRodjenja, datumRegistrovanja, uloga, korisnickoIme, lozinka, mejl);
+
+		this.webShop = webShop;
+		this.webShop.addRegistrovaniKupac(this);
+	}
+	
    public void pregledajNarudzbine() {
       // TODO: implement
    }
@@ -108,9 +53,15 @@ public java.util.Collection<Proizvod> listaZelja;
       // TODO: implement
    }
    
-   public boolean plati(double suma, Narudzbina narudzbina) {
-      // TODO: implement
-      return false;
+   public boolean platiNarudzbinu(double suma) {
+      Narudzbina narudzbinaZaPlatiti = narudzbina.get(narudzbina.size() - 1);
+      if (suma >= narudzbinaZaPlatiti.getUkupnaCena())
+      {
+    	  narudzbinaZaPlatiti.izvrsenaUplata();
+    	  return true;
+      }
+      else
+    	  return false;
    }
    
    public void izbrisiNarudzbinu(Narudzbina narudzbina) {
@@ -131,24 +82,36 @@ public java.util.Collection<Proizvod> listaZelja;
    }
    
    public void dodajProizvodUKorpu(Proizvod proizvod, int kolicina) {
-      // TODO: implement
+		if (narudzbina.isEmpty() || narudzbina.get(narudzbina.size() - 1).isPlacena())
+			kreirajKorpu();
+
+		double jedinicnaCena = proizvod.getStavkaCenovnika().get(proizvod.getStavkaCenovnika().size() - 1).getJedinicnaCena();
+		double ukupnaCena = jedinicnaCena * kolicina;
+		StavkaNarudzbine stavka = new StavkaNarudzbine(kolicina, jedinicnaCena, ukupnaCena, proizvod);
+		narudzbina.get(narudzbina.size() - 1).dodajStavku(stavka);
    }
    
    public void obrisiProizvodIzKorpe(Proizvod proizvod) {
       // TODO: implement
    }
    
+   public void kreirajKorpu() {
+	   Narudzbina narudzbina1 = new Narudzbina("0", 0, false, null, null, null, this);
+	   narudzbina.add(narudzbina1);
+	   webShop.addNarudzbina(narudzbina1);
+   }
+   
    /** @pdGenerated default getter */
-   public java.util.Collection<Proizvod> getListaZelja() {
+   public java.util.ArrayList<Proizvod> getListaZelja() {
       if (listaZelja == null)
-         listaZelja = new java.util.HashSet<Proizvod>();
+         listaZelja = new java.util.ArrayList<Proizvod>();
       return listaZelja;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorListaZelja() {
       if (listaZelja == null)
-         listaZelja = new java.util.HashSet<Proizvod>();
+         listaZelja = new java.util.ArrayList<Proizvod>();
       return listaZelja.iterator();
    }
    
@@ -166,7 +129,7 @@ public java.util.Collection<Proizvod> listaZelja;
       if (newProizvod == null)
          return;
       if (this.listaZelja == null)
-         this.listaZelja = new java.util.HashSet<Proizvod>();
+         this.listaZelja = new java.util.ArrayList<Proizvod>();
       if (!this.listaZelja.contains(newProizvod))
          this.listaZelja.add(newProizvod);
    }
@@ -210,4 +173,67 @@ public java.util.Collection<Proizvod> listaZelja;
       }
    }
 
+   public String getIme() {
+		return ime;
+	}
+
+	public void setIme(String ime) {
+		this.ime = ime;
+	}
+
+	public String getPrezime() {
+		return prezime;
+	}
+
+	public void setPrezime(String prezime) {
+		this.prezime = prezime;
+	}
+
+	public Date getDatumRodjenja() {
+		return datumRodjenja;
+	}
+
+	public void setDatumRodjenja(Date datumRodjenja) {
+		this.datumRodjenja = datumRodjenja;
+	}
+
+	public Date getDatumRegistrovanja() {
+		return datumRegistrovanja;
+	}
+
+	public void setDatumRegistrovanja(Date datumRegistrovanja) {
+		this.datumRegistrovanja = datumRegistrovanja;
+	}
+
+	public Uloga getUloga() {
+		return uloga;
+	}
+
+	public void setUloga(Uloga uloga) {
+		this.uloga = uloga;
+	}
+
+	public String getKorisnickoIme() {
+		return korisnickoIme;
+	}
+
+	public void setKorisnickoIme(String korisnickoIme) {
+		this.korisnickoIme = korisnickoIme;
+	}
+
+	public String getLozinka() {
+		return lozinka;
+	}
+
+	public void setLozinka(String lozinka) {
+		this.lozinka = lozinka;
+	}
+
+	public String getMejl() {
+		return mejl;
+	}
+
+	public void setMejl(String mejl) {
+		this.mejl = mejl;
+	}
 }

@@ -18,14 +18,14 @@ public class Proizvod {
    private float masa;
    private int garancija;
    
-   public java.util.Collection<StavkaCenovnika> stavkaCenovnika;
-   public java.util.Collection<Prodavnica> prodavnica;
+   public ArrayList<StavkaCenovnika> stavkaCenovnika;
+   public ArrayList<Prodavnica> prodavnica;
    public Kategorija kategorija;
    
    public void dodajProdavnicu(Prodavnica prodavnica) {
       // TODO: implement
    }
-   
+
    public Prodavnica nadjiProdavnicu(String id) {
       // TODO: implement
       return null;
@@ -50,22 +50,22 @@ public class Proizvod {
    
    
    /** @pdGenerated default getter */
-   public java.util.Collection<StavkaCenovnika> getStavkaCenovnika() {
+   public ArrayList<StavkaCenovnika> getStavkaCenovnika() {
       if (stavkaCenovnika == null)
-         stavkaCenovnika = new java.util.HashSet<StavkaCenovnika>();
+         stavkaCenovnika = new ArrayList<StavkaCenovnika>();
       return stavkaCenovnika;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorStavkaCenovnika() {
       if (stavkaCenovnika == null)
-         stavkaCenovnika = new java.util.HashSet<StavkaCenovnika>();
+         stavkaCenovnika = new ArrayList<StavkaCenovnika>();
       return stavkaCenovnika.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newStavkaCenovnika */
-   public void setStavkaCenovnika(java.util.Collection<StavkaCenovnika> newStavkaCenovnika) {
+   public void setStavkaCenovnika(java.util.ArrayList<StavkaCenovnika> newStavkaCenovnika) {
       removeAllStavkaCenovnika();
       for (java.util.Iterator iter = newStavkaCenovnika.iterator(); iter.hasNext();)
          addStavkaCenovnika((StavkaCenovnika)iter.next());
@@ -77,7 +77,7 @@ public class Proizvod {
       if (newStavkaCenovnika == null)
          return;
       if (this.stavkaCenovnika == null)
-         this.stavkaCenovnika = new java.util.HashSet<StavkaCenovnika>();
+         this.stavkaCenovnika = new ArrayList<StavkaCenovnika>();
       if (!this.stavkaCenovnika.contains(newStavkaCenovnika))
       {
          this.stavkaCenovnika.add(newStavkaCenovnika);
@@ -135,4 +135,75 @@ public class Proizvod {
       }
    }
 
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public String getNaziv() {
+		return naziv;
+	}
+	
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+	
+	public String getBoja() {
+		return boja;
+	}
+	
+	public void setBoja(String boja) {
+		this.boja = boja;
+	}
+	
+	public String getOpis() {
+		return opis;
+	}
+	
+	public void setOpis(String opis) {
+		this.opis = opis;
+	}
+	
+	public String getMaterijal() {
+		return materijal;
+	}
+	
+	public void setMaterijal(String materijal) {
+		this.materijal = materijal;
+	}
+	
+	public Date getDatumProizvodnje() {
+		return datumProizvodnje;
+	}
+	
+	public void setDatumProizvodnje(Date datumProizvodnje) {
+		this.datumProizvodnje = datumProizvodnje;
+	}
+	
+	public float getMasa() {
+		return masa;
+	}
+	
+	public void setMasa(float masa) {
+		this.masa = masa;
+	}
+	
+	public int getGarancija() {
+		return garancija;
+	}
+	
+	public void setGarancija(int garancija) {
+		this.garancija = garancija;
+	}
+	
+	public java.util.ArrayList<Prodavnica> getProdavnica() {
+		return prodavnica;
+	}
+	
+	public void setProdavnica(ArrayList<Prodavnica> prodavnica) {
+		this.prodavnica = prodavnica;
+	}   
 }

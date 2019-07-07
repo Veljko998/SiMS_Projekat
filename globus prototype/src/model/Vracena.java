@@ -9,8 +9,13 @@ package model;
 import java.util.*;
 
 public class Vracena extends Stanje {
+   public Vracena(Narudzbina narudzbina) {
+		super(narudzbina);
+		// TODO Auto-generated constructor stub
+	}
+
    public void entry() {
-      // TODO: implement
+      narudzbina.povracajNovca();
    }
    
    public void poslatZahtev() {

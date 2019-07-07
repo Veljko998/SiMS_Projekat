@@ -11,11 +11,19 @@ public class WebShop {
    private String naziv;
    private String infoCentar;
    
-   public java.util.Collection<Proizvod> proizvod;
-   public java.util.Collection<Prodavnica> prodavnica;
-   public java.util.Collection<Cenovnik> cenovnik;
-   public java.util.Collection<RegistrovaniKupac> registrovaniKupac;
-   public java.util.Collection<Narudzbina> narudzbina;
+   public ArrayList<Proizvod> proizvod;
+   public ArrayList<Prodavnica> prodavnica;
+   public ArrayList<Cenovnik> cenovnik;
+   public ArrayList<RegistrovaniKupac> registrovaniKupac;
+   public ArrayList<Narudzbina> narudzbina;
+   
+   public WebShop() {
+	   proizvod = new ArrayList<Proizvod>();
+	   prodavnica = new ArrayList<Prodavnica>();
+	   cenovnik = new ArrayList<Cenovnik>();
+	   registrovaniKupac = new ArrayList<RegistrovaniKupac>();
+	   narudzbina = new ArrayList<Narudzbina>();
+   }
    
    public void dodajMenadzera(RegistrovaniKupac registrovaniKupac) {
       // TODO: implement
@@ -90,24 +98,33 @@ public class WebShop {
       // TODO: implement
    }
    
+   public void oznaciUrucenuNarudzbinu(RegistrovaniKupac kupac) {
+	   Narudzbina narudzbina = kupac.narudzbina.get(kupac.narudzbina.size() - 1);
+	   narudzbina.narudzbinaUrucena();
+   }
+   
+   public void oznaciVracenuNarudzbinu(RegistrovaniKupac kupac) {
+	   Narudzbina narudzbina = kupac.narudzbina.get(kupac.narudzbina.size() - 1);
+	   narudzbina.narudzbinaVracena();
+   }
    
    /** @pdGenerated default getter */
-   public java.util.Collection<Proizvod> getProizvod() {
+   public ArrayList<Proizvod> getProizvod() {
       if (proizvod == null)
-         proizvod = new java.util.HashSet<Proizvod>();
+         proizvod = new ArrayList<Proizvod>();
       return proizvod;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorProizvod() {
       if (proizvod == null)
-         proizvod = new java.util.HashSet<Proizvod>();
+         proizvod = new ArrayList<Proizvod>();
       return proizvod.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newProizvod */
-   public void setProizvod(java.util.Collection<Proizvod> newProizvod) {
+   public void setProizvod(ArrayList<Proizvod> newProizvod) {
       removeAllProizvod();
       for (java.util.Iterator iter = newProizvod.iterator(); iter.hasNext();)
          addProizvod((Proizvod)iter.next());
@@ -119,7 +136,7 @@ public class WebShop {
       if (newProizvod == null)
          return;
       if (this.proizvod == null)
-         this.proizvod = new java.util.HashSet<Proizvod>();
+         this.proizvod = new ArrayList<Proizvod>();
       if (!this.proizvod.contains(newProizvod))
          this.proizvod.add(newProizvod);
    }
@@ -140,22 +157,22 @@ public class WebShop {
          proizvod.clear();
    }
    /** @pdGenerated default getter */
-   public java.util.Collection<Prodavnica> getProdavnica() {
+   public ArrayList<Prodavnica> getProdavnica() {
       if (prodavnica == null)
-         prodavnica = new java.util.HashSet<Prodavnica>();
+         prodavnica = new ArrayList<Prodavnica>();
       return prodavnica;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorProdavnica() {
       if (prodavnica == null)
-         prodavnica = new java.util.HashSet<Prodavnica>();
+         prodavnica = new ArrayList<Prodavnica>();
       return prodavnica.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newProdavnica */
-   public void setProdavnica(java.util.Collection<Prodavnica> newProdavnica) {
+   public void setProdavnica(ArrayList<Prodavnica> newProdavnica) {
       removeAllProdavnica();
       for (java.util.Iterator iter = newProdavnica.iterator(); iter.hasNext();)
          addProdavnica((Prodavnica)iter.next());
@@ -167,7 +184,7 @@ public class WebShop {
       if (newProdavnica == null)
          return;
       if (this.prodavnica == null)
-         this.prodavnica = new java.util.HashSet<Prodavnica>();
+         this.prodavnica = new ArrayList<Prodavnica>();
       if (!this.prodavnica.contains(newProdavnica))
          this.prodavnica.add(newProdavnica);
    }
@@ -188,22 +205,22 @@ public class WebShop {
          prodavnica.clear();
    }
    /** @pdGenerated default getter */
-   public java.util.Collection<Cenovnik> getCenovnik() {
+   public ArrayList<Cenovnik> getCenovnik() {
       if (cenovnik == null)
-         cenovnik = new java.util.HashSet<Cenovnik>();
+         cenovnik = new ArrayList<Cenovnik>();
       return cenovnik;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorCenovnik() {
       if (cenovnik == null)
-         cenovnik = new java.util.HashSet<Cenovnik>();
+         cenovnik = new ArrayList<Cenovnik>();
       return cenovnik.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newCenovnik */
-   public void setCenovnik(java.util.Collection<Cenovnik> newCenovnik) {
+   public void setCenovnik(ArrayList<Cenovnik> newCenovnik) {
       removeAllCenovnik();
       for (java.util.Iterator iter = newCenovnik.iterator(); iter.hasNext();)
          addCenovnik((Cenovnik)iter.next());
@@ -215,7 +232,7 @@ public class WebShop {
       if (newCenovnik == null)
          return;
       if (this.cenovnik == null)
-         this.cenovnik = new java.util.HashSet<Cenovnik>();
+         this.cenovnik = new ArrayList<Cenovnik>();
       if (!this.cenovnik.contains(newCenovnik))
          this.cenovnik.add(newCenovnik);
    }
@@ -236,22 +253,22 @@ public class WebShop {
          cenovnik.clear();
    }
    /** @pdGenerated default getter */
-   public java.util.Collection<RegistrovaniKupac> getRegistrovaniKupac() {
+   public ArrayList<RegistrovaniKupac> getRegistrovaniKupac() {
       if (registrovaniKupac == null)
-         registrovaniKupac = new java.util.HashSet<RegistrovaniKupac>();
+         registrovaniKupac = new ArrayList<RegistrovaniKupac>();
       return registrovaniKupac;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorRegistrovaniKupac() {
       if (registrovaniKupac == null)
-         registrovaniKupac = new java.util.HashSet<RegistrovaniKupac>();
+         registrovaniKupac = new ArrayList<RegistrovaniKupac>();
       return registrovaniKupac.iterator();
    }
    
    /** @pdGenerated default setter
      * @param newRegistrovaniKupac */
-   public void setRegistrovaniKupac(java.util.Collection<RegistrovaniKupac> newRegistrovaniKupac) {
+   public void setRegistrovaniKupac(ArrayList<RegistrovaniKupac> newRegistrovaniKupac) {
       removeAllRegistrovaniKupac();
       for (java.util.Iterator iter = newRegistrovaniKupac.iterator(); iter.hasNext();)
          addRegistrovaniKupac((RegistrovaniKupac)iter.next());
@@ -263,7 +280,7 @@ public class WebShop {
       if (newRegistrovaniKupac == null)
          return;
       if (this.registrovaniKupac == null)
-         this.registrovaniKupac = new java.util.HashSet<RegistrovaniKupac>();
+         this.registrovaniKupac = new ArrayList<RegistrovaniKupac>();
       if (!this.registrovaniKupac.contains(newRegistrovaniKupac))
       {
          this.registrovaniKupac.add(newRegistrovaniKupac);
@@ -298,16 +315,16 @@ public class WebShop {
       }
    }
    /** @pdGenerated default getter */
-   public java.util.Collection<Narudzbina> getNarudzbina() {
+   public ArrayList<Narudzbina> getNarudzbina() {
       if (narudzbina == null)
-         narudzbina = new java.util.HashSet<Narudzbina>();
+         narudzbina = new ArrayList<Narudzbina>();
       return narudzbina;
    }
    
    /** @pdGenerated default iterator getter */
    public java.util.Iterator getIteratorNarudzbina() {
       if (narudzbina == null)
-         narudzbina = new java.util.HashSet<Narudzbina>();
+         narudzbina = new ArrayList<Narudzbina>();
       return narudzbina.iterator();
    }
    
@@ -325,7 +342,7 @@ public class WebShop {
       if (newNarudzbina == null)
          return;
       if (this.narudzbina == null)
-         this.narudzbina = new java.util.HashSet<Narudzbina>();
+         this.narudzbina = new ArrayList<Narudzbina>();
       if (!this.narudzbina.contains(newNarudzbina))
          this.narudzbina.add(newNarudzbina);
    }

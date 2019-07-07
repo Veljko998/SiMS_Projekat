@@ -13,8 +13,14 @@ public class StavkaCenovnika {
    
    public Proizvod proizvod;
    
-   
-   /** @pdGenerated default parent getter */
+   public StavkaCenovnika(String id, double jedinicnaCena, Proizvod proizvod) {
+		super();
+		this.id = id;
+		this.jedinicnaCena = jedinicnaCena;
+		this.proizvod = proizvod;
+	}
+
+/** @pdGenerated default parent getter */
    public Proizvod getProizvod() {
       return proizvod;
    }
@@ -38,4 +44,19 @@ public class StavkaCenovnika {
       }
    }
 
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public double getJedinicnaCena() {
+		return jedinicnaCena;
+	}
+	
+	public void setJedinicnaCena(double jedinicnaCena) {
+		this.jedinicnaCena = jedinicnaCena;
+	}
 }

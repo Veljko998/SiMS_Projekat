@@ -8,12 +8,18 @@ package model;
 import java.util.*;
 
 public class Korpa extends Stanje {
+   public Korpa(Narudzbina narudzbina) {
+		super(narudzbina);
+		// TODO Auto-generated constructor stub
+	}
+
    public void entry() {
-      // TODO: implement
+      narudzbina.dozvoliPromenuNarudzbine();
    }
    
    public void poslatZahtev() {
-      // TODO: implement
+      Zavrsena zavrsena = new Zavrsena(narudzbina);
+      narudzbina.promeniStanje(zavrsena);
    }
    
    public void izvrsenaUplata() {

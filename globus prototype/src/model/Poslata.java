@@ -8,8 +8,13 @@ package model;
 import java.util.*;
 
 public class Poslata extends Stanje {
+   public Poslata(Narudzbina narudzbina) {
+		super(narudzbina);
+		// TODO Auto-generated constructor stub
+	}
+
    public void entry() {
-      // TODO: implement
+	   narudzbina.slanjeRobe();
    }
    
    public void poslatZahtev() {
@@ -25,7 +30,8 @@ public class Poslata extends Stanje {
    }
    
    public void narudzbinaUrucena() {
-      // TODO: implement
+      Urucena urucena = new Urucena(narudzbina);
+      narudzbina.promeniStanje(urucena);
    }
    
    public void narudzbinaVracena() {
