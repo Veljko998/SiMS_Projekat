@@ -25,7 +25,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Korpa;
 import model.Narudzbina;
+import model.Zavrsena;
 
 public class Order {
 	
@@ -154,11 +156,7 @@ public class Order {
 		n.setId((orders.size()+1)+"");
 		n.setUkupnaCena(price2);
 		n.setPlacena(false);
-		Calendar orderDate = Calendar.getInstance();
-		orderDate.setTime(new Date());
-		n.setDatumPorudzbine(orderDate.getTime());
-		orderDate.add(Calendar.DATE, 5);
-		n.setOcekivanaIsporuka(orderDate.getTime());
+		n.poslatZahtev();
 		orders.add(n);
 	}
 
