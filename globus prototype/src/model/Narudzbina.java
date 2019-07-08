@@ -16,7 +16,15 @@ public class Narudzbina {
    private String adresaIsporuke;
    private String imeKupca;
    private String prezimeKupca;
-   private String mejlKupca;
+   
+   public Narudzbina(String imeKupca, String prezimeKupca, String mejlKupca) {
+	super();
+	this.imeKupca = imeKupca;
+	this.prezimeKupca = prezimeKupca;
+	this.mejlKupca = mejlKupca;
+}
+
+private String mejlKupca;
    
    public ArrayList<StavkaNarudzbine> stavkaNarudzbine;
    private Stanje stanje;
@@ -37,7 +45,13 @@ public class Narudzbina {
 		stanje = new Korpa(this);
 	}
 
-   public Narudzbina(String id, double ukupnaCena, boolean placena, Date datumPorudzbine, Date ocekivanaIsporuka,
+   public Narudzbina() {
+	super();
+	stavkaNarudzbine = new ArrayList<StavkaNarudzbine>();
+	stanje = new Korpa(this);
+}
+
+public Narudzbina(String id, double ukupnaCena, boolean placena, Date datumPorudzbine, Date ocekivanaIsporuka,
 		   String adresaIsporuke, String imeKupca, String prezimeKupca, String mejlKupca) {
 		super();
 		this.id = id;

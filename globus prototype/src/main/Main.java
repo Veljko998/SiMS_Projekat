@@ -10,13 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,9 +29,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.Narudzbina;
 import model.RegistrovaniKupac;
 import model.Uloga;
 
@@ -53,6 +49,8 @@ public class Main extends Application {
 	ArrayList<RegistrovaniKupac> users = new ArrayList<>();
 	FileLoader fl = new FileLoader();
 	DropShadow shadow = new DropShadow();
+	ArrayList<Narudzbina> orders = new ArrayList<>();
+	Table table = new Table();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -130,15 +128,14 @@ public class Main extends Application {
         
         kupi1.setOnAction(e -> {
 			try {
-				Order.display("Order", "Nista");
+				Order.display("Order", "Nista", orders);
 			} catch (IOException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 		});
         kupi2.setOnAction(e -> {
 			try {
-				Order.display("Order", "Nista");
+				Order.display("Order", "Nista", orders);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -146,7 +143,7 @@ public class Main extends Application {
 		});
         kupi3.setOnAction(e -> {
 			try {
-				Order.display("Order", "Nista");
+				Order.display("Order", "Nista", orders);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -154,7 +151,7 @@ public class Main extends Application {
 		});
         kupi4.setOnAction(e -> {
 			try {
-				Order.display("Order", "Nista");
+				Order.display("Order", "Nista", orders);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -397,7 +394,7 @@ public class Main extends Application {
 	    Button productsButton = new Button("Products");
 	    productsButton.setPrefSize(100, 20);
 
-	    Button button2 = new Button("Button2");
+	    Button button2 = new Button("My orders");
 	    button2.setPrefSize(100, 20);
 	    
 	    Button button3 = new Button("Button3");
@@ -424,6 +421,10 @@ public class Main extends Application {
 	    
 	    buttonSignIn.setOnAction(e -> {
 	    	window.setScene(scene3);
+	    });
+	    
+	    button2.setOnAction(e -> {
+	    	Table.display(orders);
 	    });
 	    
 //	    productsButton.setOnAction(e -> {

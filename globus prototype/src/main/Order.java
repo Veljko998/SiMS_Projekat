@@ -2,6 +2,9 @@ package main;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,10 +25,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Narudzbina;
 
 public class Order {
 	
-	public static void display(String title, String message) throws IOException {
+	public static void display(String title, String message, ArrayList<Narudzbina> orders) throws IOException {
 		Stage window = new Stage();
 		
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -38,7 +42,7 @@ public class Order {
 		GridPane gridpane = new GridPane();
 		gridpane = addGridPanePictures();
 		VBox vbox = new VBox();
-		vbox = addVBox(window);
+		vbox = addVBox(window, orders);
 		
 		border.setTop(gridpane);
 		border.setCenter(vbox);
@@ -48,7 +52,7 @@ public class Order {
 		window.show();
 	}
 
-	private static VBox addVBox(Stage window) {
+	private static VBox addVBox(Stage window, ArrayList<Narudzbina> orders) {
 		VBox vbox = new VBox();
 		vbox.setPadding(new Insets(15, 12, 15, 12));
 		vbox.setSpacing(10);
@@ -83,6 +87,13 @@ public class Order {
 		TextField mailInput = new TextField();
 		mailInput.setPromptText("email");
 		
+		//Deliver address label
+		Label addressLabel = new Label("Deliver address: ");
+		
+		//Deliver addres input
+		TextField addressInput = new TextField();
+		addressInput.setPromptText("Deliver address");
+		
 		Label numOfProductsLabel = new Label("Number of products: ");
 		
 		TextField numOfProductsInput = new TextField();
@@ -104,6 +115,14 @@ public class Order {
 	    	amount.setText("=  " + price*Integer.parseInt(numOfProductsInput.getText()) + "");
 	    });
 	    confrim.setStyle("-fx-font-size: 12pt;");
+	    
+	    confrim.setOnAction(e -> {
+	    	double price2 = price*Integer.parseInt(numOfProductsInput.getText());
+	    	createOrder(nameInput.getText(), surnameInput.getText(), mailInput.getText(), addressInput.getText(), price2, orders);
+	    	window.close();
+//	    	nameInput.clear(); surnameInput.clear(); mailInput.clear(); addressInput.clear(); 
+//	    	amount.setText("0"); numOfProductsInput.clear(); 
+	    });
 		
 	    hbButtons.getChildren().addAll(confrim, btnExit);
 	    
@@ -113,15 +132,34 @@ public class Order {
 	    grid.add(surnameInput, 1, 1);
 	    grid.add(mailLabel, 0, 2);
 	    grid.add(mailInput, 1, 2);
+	    grid.add(addressLabel, 0, 3);
+	    grid.add(addressInput, 1, 3);
 	    grid.add(numOfProductsLabel, 10, 0);
 	    grid.add(numOfProductsInput, 11, 0);
 	    grid.add(confrimNumOfProducts, 12, 0);
 	    grid.add(amount, 13, 0);
-	    grid.add(hbButtons, 0, 3, 2, 1);
+	    grid.add(hbButtons, 0, 4, 2, 1);
 	    
 	    vbox.getChildren().addAll(grid);
 		
 		return vbox;
+	}
+
+	private static void createOrder(String name, String surname, String mail, String address, double price2, ArrayList<Narudzbina> orders) {
+		Narudzbina n = new Narudzbina();
+		n.setImeKupca(name);
+		n.setPrezimeKupca(surname);
+		n.setMejlKupca(mail);
+		n.setAdresaIsporuke(address);
+		n.setId((orders.size()+1)+"");
+		n.setUkupnaCena(price2);
+		n.setPlacena(false);
+		Calendar orderDate = Calendar.getInstance();
+		orderDate.setTime(new Date());
+		n.setDatumPorudzbine(orderDate.getTime());
+		orderDate.add(Calendar.DATE, 5);
+		n.setOcekivanaIsporuka(orderDate.getTime());
+		orders.add(n);
 	}
 
 	private static GridPane addGridPanePictures() throws IOException {
